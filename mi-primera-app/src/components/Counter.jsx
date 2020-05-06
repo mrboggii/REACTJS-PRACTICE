@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 export default class Counter extends Component {
     constructor(props) {
         super(props);
@@ -9,28 +8,26 @@ export default class Counter extends Component {
             movies:[{},{},{}]
         }
     }
-    componentDidMount(){
+    componentDidMount(){//casi como el ngOnInit, pero es equivalente a ngAfterViewInit
         console.log('componente montado',this.props.inicial)
     }
-    componentDidUpdate(){
-        console.log(this.state.count)
+    componentDidUpdate(prevProps,prevState){// ngOnChanges y ngDoCheck
+        if(prevProps.inicial!==this.props.inicial){
+            this.setState({count:this.props.inicial})
+        }
+    }
+    componentWillUnmount(){//ngOnDestroy
+        console.log('componente desmontado')
     }
     increment = () => {
-        if(this.state.count>15){
-            return  this.setState({count:this.props.inicial});
-        }
         this.setState({ count: this.state.count + 1, isRed: !this.state.isRed })
-    }
-    deleteMovie = (movie_id)=>{
-        const filteredMovies =this.state.movies.filter(movie=>movie.id !== movie_id);
-        this.setState({movies:filteredMovies})
     }
     render() {
         return (
             <div onClick={this.increment} 
             style={{ color: this.state.isRed ? 'red' : 'white' }}>
                 {this.state.count}
-            </div>
+                 </div>
         )
     }
 }

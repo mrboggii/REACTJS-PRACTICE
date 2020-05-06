@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 const Counter = props => {
     const [state, setState] = useState({
         count: props.inicial,
         isRed: false
-    })
+    });
+    useEffect(() => {
+        //componentDidMount
+        console.log('componente montado',props.inicial)
+        return function componentWillUnmount() {//componentWillUnmount
+            console.log('componente desmontado')
+        }
+    }, [])
+    useEffect(() => {//componentDidUpdate
+        setState({count:props.inicial})
+    }, [props.inicial])
     const increment = () => {
         setState({ count: state.count + 1, isRed: !state.isRed })
     }
