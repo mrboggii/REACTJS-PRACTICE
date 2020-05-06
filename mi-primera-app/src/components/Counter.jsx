@@ -30,7 +30,6 @@ export default class Counter extends Component {
             <div onClick={this.increment} 
             style={{ color: this.state.isRed ? 'red' : 'white' }}>
                 {this.state.count}
-                <button onClick={()=>deleteMovie(movie_id)}>Eliminar Película</button>
             </div>
         )
     }
